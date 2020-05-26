@@ -8,12 +8,16 @@
   crossorigin="anonymous"></script>
   <script>
  $(document).ready(function() {
+    $("#settings").hide();
     get_groceries();
     $('.buttons').on('click', 'button', function(){
       deliver($(this).attr('id'),$('#complexity').attr('value'),$('#size').attr('value'))
     });
     $("#shop").click(function(){
       shop();
+    });
+    $("#nav").click(function(){
+      $("#settings").toggle();
     });
   });
   function deliver(shopping_list,complexity,size) {
@@ -50,23 +54,23 @@
   <title>eatK8s</title>
 </head>
 <body>
-<nav><a href="/" class="brand"><span>eatk8s</span></a>
-<input id="bmenu" type="checkbox" class="show"><label for="bmenu" class="burger toggle pseudo button">menu</label><div class="menu">
-<button id="shop" class="primary">Go Shopping!</button>
-<label>
-  <input type='radio' checked name="robot"><span class="checkable">Human</span>
-</label>
-<input id="robot" type='radio' name="robot">  
-  <label for="robot" class="checkable">Robot</label>
-  <fieldset>
-  <label>complexity<input type="text" id="complexity" placeholder="complexity" value="1"></label>
-  <label>size<input type="text" id="size" placeholder="size" value="1"></label>
-</fieldset>
+<div class="flex one" style="padding:30px">
+<article class="card">
+  <header>
+    <button id="nav">settings</button>
+    <button id="shop">shop!</button>
+  </header>
+  <div id="settings" style="padding:10px">
+    <label>
+    <input type="checkbox" id="robot">
+    <span class="checkable">robot mode</span><br>
+    <label>complexity<input type="text" id="complexity" placeholder="complexity" value="1"></label>
+    <label>size<input type="text" id="size" placeholder="size" value="1"></label>
+    </label>
+  </div>
+</article>
 </div>
-</nav>
-<section class="flex demo" style="padding:30px">
-<main id="home" class="documentation">
-<p>&nbsp;</p>
+<div class="flex one" style="padding:30px">
 <table class="primary">
   <thead>
     <tr>
@@ -78,9 +82,6 @@
   <tbody class="buttons" id="shopping_list">
   </tbody>
 </table>
-
-
-</section>
-</main>
+</div>
 </body>
 </html>
