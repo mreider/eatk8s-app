@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: eatk8s
-        image: gcr.io/dynatrace-dev-on-demand/eatk8s-app:$COMMIT_SHA
+        image: gcr.io/dynatrace-dev-on-demand/github.com/mreider/eatk8s-app:$COMMIT_SHA
         resources:
           requests:
             cpu: 100m
