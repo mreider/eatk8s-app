@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: eatk8s
-        image: gcr.io/dynatrace-dev-on-demand/eatk8s-app
+        image: dynatrace-dev-on-demand/eatk8s-app
         resources:
           requests:
             cpu: 100m
