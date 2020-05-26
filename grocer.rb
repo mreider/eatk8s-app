@@ -11,16 +11,17 @@ class Grocer
         shopper_name = @redis.get(shopping_list)
         @redis.del(shopping_list)
         calculate_things(complexity)
-        grow_orders(size,shopping_list)
+        grow_order(size,shopping_list)
         return true
     end
 
-    def calculate_things(complexity)
-        complexity <= 2 ? 1 : fibonacci(complexity - 1) + fibonacci(complexity - 2)
-        return true
+    def calculate_things(n)
+        return  n  if ( 0..1 ).include? n
+        ( calculate_things( n - 1 ) + calculate_things( n - 2 ) )
     end
 
     def grow_order(size,shopping_list)
+        a = ""
         size.times { a << shopping_list.to_s }
     end
 

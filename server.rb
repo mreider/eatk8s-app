@@ -15,8 +15,8 @@ get '/shop' do
 end
 
 post '/deliver' do
-    grocer = Grocer.new  deliver(shopping_list,complexity=1,size=1)
-    grocer.deliver(params['shopping_list'],params['complexity'],params['size'])
+    grocer = Grocer.new 
+    grocer.deliver(params['shopping_list'],params['complexity'].to_i,params['size'].to_i)
     return params['shopping_list'].to_json
 end
 

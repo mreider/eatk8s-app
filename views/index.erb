@@ -1,23 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/simple-grid.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
-  <title>EatK8s</title>
+  <script>
+ $(document).ready(function() {
+    get_groceries();
+    $('.buttons').on('click', 'button', function(){
+      deliver($(this).attr('id'),$('#complexity').attr('value'),$('#size').attr('value'))
+    });
+    $("#shop").click(function(){
+      shop();
+    });
+  });
+  function deliver(shopping_list,complexity,size) {
+    $.ajax({
+        url: '/deliver',
+        data: {
+            shopping_list: shopping_list,
+            complexity: complexity,
+            size: size
+        },
+        type: 'POST',
+        dataType: 'html'
+    }).done(function() {
+      get_groceries();
+    });
+  }
+  function get_groceries() {
+    $.getJSON('/whois', function(data) {
+        var output = '';
+        $.each(data, function(key, value) {
+            output += '<tr><td>' + value + '<td>' + key + '</td><td><button id="' + key + '">deliver</button></td></tr>';
+        });
+        $('#shopping_list').html(output); // <ul id="example"></ul>
+    });
+  }
+  function shop() {
+    $.getJSON('/shop', function(data) {
+    }).done(function() {
+    get_groceries();
+    $( "#bmenu" ).trigger( "click" );
+    });
+  }
+  </script>
+  <title>eatK8s</title>
 </head>
 <body>
-<div class="container">
-<div class="row">
-&nbsp;
+<nav><a href="/" class="brand"><span>eatk8s</span></a>
+<input id="bmenu" type="checkbox" class="show"><label for="bmenu" class="burger toggle pseudo button">menu</label><div class="menu">
+<button id="shop" class="primary">Go Shopping!</button>
+<label>
+  <input type='radio' checked name="robot"><span class="checkable">Human</span>
+</label>
+<input id="robot" type='radio' name="robot">  
+  <label for="robot" class="checkable">Robot</label>
+  <fieldset>
+  <label>complexity<input type="text" id="complexity" placeholder="complexity" value="1"></label>
+  <label>size<input type="text" id="size" placeholder="size" value="1"></label>
+</fieldset>
 </div>
-<div class="row">
-  <div class="col-8">
-  &nbsp;
-  </div>
-</div>
-</div>
+</nav>
+<section class="flex demo" style="padding:30px">
+<main id="home" class="documentation">
+<p>&nbsp;</p>
+<table class="primary">
+  <thead>
+    <tr>
+      <th>Shopper</th>
+      <th>Groceries</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody class="buttons" id="shopping_list">
+  </tbody>
+</table>
+
+
+</section>
+</main>
 </body>
 </html>
