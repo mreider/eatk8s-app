@@ -5,4 +5,3 @@ WORKDIR /usr/src/app
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 COPY . .
-CMD ["rackup"]

@@ -10,13 +10,14 @@ end
 
 get '/shop' do
     shopper = Shopper.new
-    shopping_info = shopper.shop
+    cycles = params[:cycles] || 1
+    shopping_info = shopper.shop(cycles)
     return shopping_info.to_json
 end
 
 post '/deliver' do
     grocer = Grocer.new 
-    grocer.deliver(params['shopping_list'],params['complexity'].to_i,params['size'].to_i)
+    grocer.deliver(params['shopping_list'])
     return params['shopping_list'].to_json
 end
 

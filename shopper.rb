@@ -10,7 +10,7 @@ class Shopper
         @redis = Redis.new(host: ENV['REDIS_HOST'], port: ENV['REDIS_PORT'], db: 0)
     end
 
-    def shop()
+    def shop(cycles)
         fruits = ["🍇","🍈","🍉","🍊","🍋","🍌","🍍","🥭","🍎","🍏","🍐","🍑","🍒","🍓","🥝"]
         shopping_list_array = Array.new
         shopping_list_array.push(fruits.sample(8))
@@ -21,7 +21,15 @@ class Shopper
         @redis.set(@shopping_list,@shopper_name)
         return_value = {}
         return_value[@shopping_list] = @shopper_name
-        #binding.pry
+        think(shopping_list,cycles)
         return return_value
     end
+
+    def think(shopping_list,cycles)
+        cycles.to_i
+        sleep(1)
+        a = ""
+        cycles.times { a << shopping_list.to_s }
+    end
+
 end

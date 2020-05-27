@@ -9,7 +9,7 @@ describe 'the eatk8s app' do
     end
 
     it "has a shopping list in the database" do
-        @shopper.shop
+        @shopper.shop(1)
         @shopping_lists = @grocer.get_active_shopping_lists
         expect(@shopping_lists.empty?).to eq false
     end

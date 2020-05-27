@@ -7,22 +7,10 @@ class Grocer
         @redis = Redis.new(host: ENV['REDIS_HOST'], port: ENV['REDIS_PORT'], db: 0)
     end
 
-    def deliver(shopping_list,complexity=1,size=1)
+    def deliver(shopping_list)
         shopper_name = @redis.get(shopping_list)
         @redis.del(shopping_list)
-        calculate_things(complexity)
-        grow_order(size,shopping_list)
         return true
-    end
-
-    def calculate_things(n)
-        return  n  if ( 0..1 ).include? n
-        ( calculate_things( n - 1 ) + calculate_things( n - 2 ) )
-    end
-
-    def grow_order(size,shopping_list)
-        a = ""
-        size.times { a << shopping_list.to_s }
     end
 
     def get_active_shopping_lists()
