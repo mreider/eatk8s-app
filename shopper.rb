@@ -1,16 +1,18 @@
 require "redis"
 require "date"
 require "pry"
+require 'sidekiq'
+require 'sidekiq-status'
+require_relative 'grocer'
 
+
+redis_host = ENV['REDIS_HOST'] || "localhost"
+redis_port = ENV['REDIS_PORT'] || "6379"
 
 class Shopper
     attr_accessor :redis, :shopping_list, :shopper_name
-    
-    def initialize()
-        @redis = Redis.new(host: ENV['REDIS_HOST'], port: ENV['REDIS_PORT'], db: 0)
-    end
 
-    def shop(cycles)
+    def shop(indecision,complexity)
         fruits = ["🍇","🍈","🍉","🍊","🍋","🍌","🍍","🥭","🍎","🍏","🍐","🍑","🍒","🍓","🥝"]
         shopping_list_array = Array.new
         shopping_list_array.push(fruits.sample(8))
@@ -18,18 +20,14 @@ class Shopper
         name_file = File.open "names.json"
         names = JSON.load name_file
         @shopper_name = names['names'].sample
-        @redis.set(@shopping_list,@shopper_name)
-        return_value = {}
-        return_value[@shopping_list] = @shopper_name
-        think(shopping_list,cycles)
-        return return_value
+        think(shopping_list,indecision)
+        job_id = Grocer.perform_async(@shopping_list,@shopper_name,complexity)
+        return job_id
     end
 
-    def think(shopping_list,cycles)
-        cycles.to_i
-        sleep(1)
+    def think(shopping_list,indecision)
         a = ""
-        cycles.times { a << shopping_list.to_s }
+        indecision.times { a << shopping_list.to_s }
     end
 
 end

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eatk8s-shopper
+  labels:
+    app: eatk8s-shopper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eatk8s-shopper
+  template:
+    metadata:
+      labels:
+        app: eatk8s-shopper
+    spec:
+      containers:
+      - name: eatk8s-shopper
+        image: gcr.io/dynatrace-dev-on-demand/github_mreider_eatk8s-app
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 4567
+          name: api
+        env:
+          - name: REDIS_HOST
+            value: redis
+          - name: REDIS_PORT
+            value: "6379"
+          - name: SHOPPER_HOST
+            value: eatk8s-shopper
+          - name: SHOPPER_PORT
+            value: "4567"
+          - name: GROCER_HOST
+            value: eatk8s-grocer
+          - name: SHOPPER_PORT
+            value: "4567"
+        args: ["rackup"]

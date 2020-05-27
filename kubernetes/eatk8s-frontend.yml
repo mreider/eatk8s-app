@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eatk8s
+  name: eatk8s-frontend
   labels:
-    app: eatk8s
+    app: eatk8s-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: eatk8s
+      app: eatk8s-frontend
   template:
     metadata:
       labels:
-        app: eatk8s
+        app: eatk8s-frontend
     spec:
       containers:
-      - name: eatk8s
+      - name: eatk8s-frontend
         image: gcr.io/dynatrace-dev-on-demand/github_mreider_eatk8s-app
         resources:
           requests:
@@ -29,4 +29,12 @@ spec:
             value: redis
           - name: REDIS_PORT
             value: "6379"
+          - name: SHOPPER_HOST
+            value: eatk8s-shopper
+          - name: SHOPPER_PORT
+            value: "4567"
+          - name: GROCER_HOST
+            value: eatk8s-grocer
+          - name: SHOPPER_PORT
+            value: "4567"
         args: ["rackup"]

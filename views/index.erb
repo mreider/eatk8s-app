@@ -38,7 +38,7 @@
     $.getJSON('/whois', function(data) {
         var output = '';
         $.each(data, function(key, value) {
-            output += '<tr><td>' + value + '<td>' + key + '</td><td><button id="' + key + '">deliver</button></td></tr>';
+            output += '<tr><td>' + value + '<td>' + key + '</td></tr>';
         });
         $('#shopping_list').html(output); // <ul id="example"></ul>
     });
@@ -47,7 +47,6 @@
     $.getJSON('/shop', function(data) {
     }).done(function() {
     get_groceries();
-    $( "#bmenu" ).trigger( "click" );
     });
   }
   </script>
@@ -76,7 +75,6 @@
     <tr>
       <th>Shopper</th>
       <th>Groceries</th>
-      <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody class="buttons" id="shopping_list">
