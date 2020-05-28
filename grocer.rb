@@ -25,12 +25,6 @@ class Grocer
     def perform(shopping_list,shopper,complexity=1)
         sleep complexity
     end
-
 end
 
-
-shopper_host = ENV['SHOPPER_HOST'] || "localhost"
-shopper_port = ENV['SHOPPER_PORT'] || "4567"
-grocer_host = ENV['GROCER_HOST'] || "localhost"
-grocer_port = ENV['GROCER_PORT'] || "4567"
 
