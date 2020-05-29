@@ -74,11 +74,10 @@
     });
   }
   function shop() {
-    $.getJSON('/shop', function(data) {
-      $('.buttons').on('click', 'button', function(){
-      indecision: $('#indecision').attr('value'),
-      complexity: $('#complexity').attr('value')
-    });
+    indecision = $('#indecision').val();
+    complexity = $('#complexity').val();
+    var myObj = {indecision: indecision, complexity: complexity}
+    $.getJSON('/shop', myObj, function(data) {
     }).done(function() {
     get_groceries();
     });
@@ -97,8 +96,8 @@
     <label>
     <input type="checkbox" id="robot">
     <span class="checkable">robot mode</span> <span id="mode-status">OFF</span><br>
-    <label>indecision<input type="text" id="complexity" placeholder="complexity" value="2000"></label>
-    <label>complexity<input type="text" id="size" placeholder="size" value="1"></label>
+    <label>indecision<input type="text" id="indecision" placeholder="indecision" value="2000"></label>
+    <label>complexity<input type="text" id="complexity" placeholder="complexity" value="1"></label>
     </label>
   </div>
 </article>

@@ -21,6 +21,7 @@ class Shopper
         names = JSON.load name_file
         @shopper_name = names['names'].sample
         think(shopping_list,indecision)
+        #binding.pry
         uri = 'http://' + @@grocer_host + ":" + @@grocer_port + '/deliver'
         options = {
             body: {
@@ -35,9 +36,9 @@ class Shopper
     end
 
     def think(shopping_list,indecision)
-        a = ""
+        a = []
         i = indecision.to_i
-        i.times { a << shopping_list.to_s }
+        i.times { a.push(shopping_list.to_s) }
     end
 
 end

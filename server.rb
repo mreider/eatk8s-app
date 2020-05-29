@@ -43,12 +43,11 @@ end
 get '/shop' do
     indecision = params[:indecision] || 2000
     complexity = params[:complexity] || 4
-
     uri = 'http://' + @@shopper_host + ":" + @@shopper_port + '/purchase'
         options = {
             body: {
-                :indecision => indecision, # your columns/data
-                :complexity => complexity
+                :indecision => indecision.to_i, # your columns/data
+                :complexity => complexity.to_i
             }
         }
         
