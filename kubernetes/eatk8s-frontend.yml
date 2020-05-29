@@ -30,11 +30,11 @@ spec:
           - name: REDIS_PORT
             value: "6379"
           - name: SHOPPER_HOST
-            value: eatk8s-shopper
+            value: eatk8s-shopper-service
           - name: SHOPPER_PORT
             value: "4567"
           - name: GROCER_HOST
-            value: eatk8s-grocer
+            value: eatk8s-grocer-service
           - name: SHOPPER_PORT
             value: "4567"
         args: ["rackup"]
