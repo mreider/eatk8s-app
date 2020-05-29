@@ -6,4 +6,3 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install
 COPY . .
 RUN chmod +x grocer-start.sh
-CMD  ["./grocer-start.sh"]
