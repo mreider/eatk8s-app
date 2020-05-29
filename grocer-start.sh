@@ -1,7 +1,3 @@
-trap "exit" INT TERM ERR
-trap "kill 0" EXIT
-
+#!/bin/bash
 rackup &
 bundle exec sidekiq -r ./grocer.rb -q default
-
-wait
