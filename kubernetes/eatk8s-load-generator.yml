@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: eatk8s-load-generator
-        image: mreider/eatk8s:latest
+        image: gcr.io/dynatrace-dev-on-demand/github_mreider_eatk8s-app
         resources:
           requests:
             cpu: 100m
