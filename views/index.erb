@@ -40,9 +40,6 @@
  $(document).ready(function() {
     $("#settings").hide();
     get_groceries();
-    $('.buttons').on('click', 'button', function(){
-      deliver($(this).attr('id'),$('#complexity').attr('value'),$('#size').attr('value'))
-    });
     $("#shop").click(function(){
       shop();
     });
@@ -78,6 +75,10 @@
   }
   function shop() {
     $.getJSON('/shop', function(data) {
+      $('.buttons').on('click', 'button', function(){
+      indecision: $('#indecision').attr('value'),
+      complexity: $('#complexity').attr('value')
+    });
     }).done(function() {
     get_groceries();
     });
@@ -96,8 +97,8 @@
     <label>
     <input type="checkbox" id="robot">
     <span class="checkable">robot mode</span> <span id="mode-status">OFF</span><br>
-    <label>complexity<input type="text" id="complexity" placeholder="complexity" value="1"></label>
-    <label>size<input type="text" id="size" placeholder="size" value="1"></label>
+    <label>indecision<input type="text" id="complexity" placeholder="complexity" value="2000"></label>
+    <label>complexity<input type="text" id="size" placeholder="size" value="1"></label>
     </label>
   </div>
 </article>
