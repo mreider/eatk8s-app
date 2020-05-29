@@ -6,3 +6,4 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install
 COPY . .
 RUN chmod +x grocer-start.sh
+RUN chmod +x endless.sh
