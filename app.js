@@ -29,9 +29,14 @@ Peace be with you.
 - Matt
 
 */
-
-
-if (typeof process.env.REDIS_HOST !== 'undefined'){
+if(typeof process.env.REDIS_SERVICE_HOST !== 'undefined'){
+    var redis_host = process.env.REDIS_SERVICE_HOST;
+    var redis_port = process.env.REDIS_SERVICE_PORT;
+    var shopper_host = process.env.SHOPPER_HOST;
+    var shopper_port = process.env.SHOPPER_PORT;
+    var grocer_host = process.env.GROCER_HOST;
+    var grocer_port = process.env.GROCER_PORT;
+} else if (typeof process.env.REDIS_HOST !== 'undefined'){
     var redis_host = process.env.REDIS_HOST;
     var redis_port = process.env.REDIS_PORT;
     var shopper_host = process.env.SHOPPER_HOST;
