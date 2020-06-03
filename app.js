@@ -156,7 +156,7 @@ router.post('/purchase',function(req,res){
 
 app.use('/', router);
 
-app.listen(3000);
+app.listen(8080);
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
