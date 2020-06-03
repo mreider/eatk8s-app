@@ -35,6 +35,6 @@ spec:
             value: "8080"
           - name: GROCER_HOST
             value: eatk8s-grocer-service
-          - name: SHOPPER_PORT
+          - name: GROCER_PORT
             value: "8080"
         args: ["./grocer-start.sh"]
