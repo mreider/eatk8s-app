@@ -1,6 +1,6 @@
 # eatk8s
 
-🍏☸
+🍏 ☸
 
 ## A little K8s test app
 
