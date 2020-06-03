@@ -31,13 +31,13 @@ Peace be with you.
 */
 
 
-if (typeof process.REDIS_HOST !== 'undefined'){
-    var redis_host = process.REDIS_HOST;
-    var redis_port = process.REDIS_PORT;
-    var shopper_host = process.SHOPPER_HOST;
-    var shopper_port = process.SHOPPER_PORT;
-    var grocer_host = process.GROCER_HOST;
-    var grocer_port = process.GROCER_PORT;
+if (typeof process.env.REDIS_HOST !== 'undefined'){
+    var redis_host = process.env.REDIS_HOST;
+    var redis_port = process.env.REDIS_PORT;
+    var shopper_host = process.env.SHOPPER_HOST;
+    var shopper_port = process.env.SHOPPER_PORT;
+    var grocer_host = process.env.GROCER_HOST;
+    var grocer_port = process.env.GROCER_PORT;
 }else{
     var redis_host = 'localhost';
     var redis_port = '6379';
