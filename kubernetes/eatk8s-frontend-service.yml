@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: eatk8s-frontend-service
+  name: eatk8s-frontend
 spec:
   type: LoadBalancer
   ports:

@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service        # Type of Kubernetes resource
 metadata:
-  name: redis # Name of the Kubernetes resource
+  name: redis-service # Name of the Kubernetes resource
   labels:            # Labels that will be applied to this resource
     app: redis
     role: master
