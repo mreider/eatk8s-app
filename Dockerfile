@@ -1,9 +1,8 @@
-FROM jruby:9
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
+FROM node:12
 WORKDIR /usr/src/app
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 COPY . .
-RUN chmod +x grocer-start.sh
+EXPOSE 8080
 RUN chmod +x endless.sh
+RUN chmod +x grocer-start.sh
