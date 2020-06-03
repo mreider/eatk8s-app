@@ -6,7 +6,7 @@ spec:
   type: LoadBalancer
   ports:
   - name: api
-    port: 4567
-    targetPort: 4567
+    port: 8080
+    targetPort: 8080
   selector:
     app: eatk8s-frontend
