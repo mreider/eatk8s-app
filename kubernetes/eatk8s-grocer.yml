@@ -26,15 +26,15 @@ spec:
           name: api
         env:
           - name: REDIS_HOST
-            value: redis
+            value: redis-service
           - name: REDIS_PORT
             value: "6379"
           - name: SHOPPER_HOST
-            value: eatk8s-shopper-service
+            value: eatk8s-shopper
           - name: SHOPPER_PORT
             value: "8080"
           - name: GROCER_HOST
-            value: eatk8s-grocer-service
+            value: eatk8s-grocer
           - name: SHOPPER_PORT
             value: "8080"
         args: ["./grocer-start.sh"]
