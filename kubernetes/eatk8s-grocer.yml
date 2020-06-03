@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: eatk8s-grocer
-        image: mreider/eatk8s:latest
+        image: docker.io/mreider/eatk8s:latest
         resources:
           requests:
             cpu: 100m
