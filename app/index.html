@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/picnic"
+        rel="stylesheet">
+  <style>
+
+  #mode-status {
+  color: #A9A9A9;
+  }
+
+  .pulse {
+        background: rgba(255, 121, 63, 1);
+  box-shadow: 0 0 0 0 rgba(255, 121, 63, 1);
+        margin: 10px;
+        height: 20px;
+        width: 20px;
+        animation: pulse-orange 2s;
+  }
+
+  @keyframes pulse-orange {
+        0% {
+                box-shadow: 0 0 0 0 rgba(255, 121, 63, 0.7);
+        }
+        
+        70% {
+                box-shadow: 0 0 0 10px rgba(255, 121, 63, 0);
+        }
+        
+        100% {
+                box-shadow: 0 0 0 0 rgba(255, 121, 63, 0);
+        }
+  }
+  </style>
+  <script crossorigin="anonymous"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+  var last_retrieved_data = {}
+  $(document).ready(function() {
+    $("#settings").hide();
+    get_groceries();
+    $("#shop").click(function(){
+      shop();
+    });
+    $("#nav").click(function(){
+      $("#settings").toggle();
+    });
+    $( "#robot" ).click(function() {
+      if ($('#robot').is(':checked')) {
+        $('#mode-status').html("ON");
+        time=setInterval(function(){
+          shop()
+        },1000);
+      }else{
+        $('#mode-status').html("OFF");
+        clearInterval(time);
+      }
+    });
+  });
+  function get_groceries() {
+    $.getJSON('/whois', function(data) {
+        var output = '';
+        $.each(data, function(key, value) {
+          if (!(key in last_retrieved_data)){
+            output += '<tr class="pulse"><td>' + value + '<td>' + key + '<\/td><\/tr>';
+          }else{
+            output += '<tr><td>' + value + '<td>' + key + '<\/td><\/tr>';
+          }
+            
+        });
+        $('#shopping_list').html(output); // <ul id="example"><\/ul>
+        last_retrieved_data = data;
+    });
+  }
+  function shop() {
+    indecision = $('#indecision').val();
+    complexity = $('#complexity').val();
+    var myObj = {indecision: indecision, complexity: complexity}
+    $.getJSON('/shop', myObj, function(data) {
+    }).done(function() {
+    get_groceries();
+    });
+  }
+  </script>
+  <title>eatK8s</title>
+</head>
+<body>
+  <div class="flex one"
+       style="padding:30px">
+    <article class="card">
+      <header>
+        <button id="nav">settings</button> <button id="shop">shop!</button>
+      </header>
+      <div id="settings"
+           style="padding:10px">
+        <label><input id="robot"
+               type="checkbox"> <span class="checkable">robot mode</span> <span id="mode-status">OFF</span><br>
+        <label>indecision<input id="indecision"
+               placeholder="indecision"
+               type="text"
+               value="2000"></label> <label>complexity<input id="complexity"
+               placeholder="complexity"
+               type="text"
+               value="1"></label></label>
+      </div>
+    </article>
+  </div>
+  <div class="flex one"
+       style="padding:30px">
+    <table class="primary">
+      <thead>
+        <tr>
+          <th>Shopper</th>
+          <th>Groceries</th>
+        </tr>
+      </thead>
+      <tbody class="buttons"
+             id="shopping_list"></tbody>
+    </table>
+  </div>
+</body>
+</html>
