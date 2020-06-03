@@ -42,9 +42,9 @@ if (typeof process.env.REDIS_HOST !== 'undefined'){
     var redis_host = 'localhost';
     var redis_port = '6379';
     var shopper_host = 'localhost';
-    var shopper_port = '3000';
+    var shopper_port = '8080';
     var grocer_host = 'localhost';
-    var grocer_port = '3000';
+    var grocer_port = '8080';
 }
 var return_shopping_list = {};
 var client = redis.createClient(redis_port,redis_host, {no_ready_check: true});

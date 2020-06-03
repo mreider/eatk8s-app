@@ -6,7 +6,7 @@ else
 fi
 
 if [[ -z "${SHOPPER_PORT}" ]]; then
-  SHOPPER_PORT="4567"
+  SHOPPER_PORT="8080"
 else
   SHOPPER_PORT="${SHOPPER_PORT}"
 fi
