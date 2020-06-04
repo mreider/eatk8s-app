@@ -72,9 +72,7 @@ router.get('/shop',function(req,res){
         }).then((res) => {
         console.log("purchased")
         })
-        .catch((error) => {
-        console.error(error)
-        })
+        
     var myObj = {status: "ok"};
     res.send(JSON.stringify(myObj));     
 });
@@ -145,9 +143,6 @@ router.post('/purchase',function(req,res){
         shopping_list: shopping_list,
         complexity: complexity
         }).then((response) => {
-        })
-        .catch((error) => {
-        console.error(error)
         })
     var myObj = {status: "ok"};
     res.send(JSON.stringify(myObj));
