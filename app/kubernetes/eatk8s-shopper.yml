@@ -20,7 +20,10 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 100Mi
+            memory: 32Mi
+          limits:
+            memory: 64Mi
+            cpu: 100m
         ports:
         - containerPort: 8080
           name: api
