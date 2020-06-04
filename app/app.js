@@ -57,14 +57,14 @@ router.get('/',function(req,res){
 
 router.get('/shop',function(req,res){
     if (typeof req.query.indecision !== 'undefined'){
-        indecision = 2000;
+        indecision = req.query.indecision;  
     }else{
-        indecision = req.query.indecision;    
+        indecision = 2000;  
     }
     if (typeof req.query.complexity !== 'undefined'){
-        complexity = 1;
+        complexity = req.query.complexity; 
     }else{
-        complexity = req.query.complexity;    
+        complexity = 1;   
     }
     axios.post('http://' + shopper_host + ':' + shopper_port + '/purchase', {
         indecision: indecision,
@@ -93,12 +93,17 @@ router.get('/whois',function(req,res){
         for (var i in key_array){
             client.hgetall(key_array[i], function(err, obj) {
                 if (typeof obj != "undefined") {
+                    try{
                     data = JSON.parse(obj.data);
-                    console.log(util.inspect(obj));
+                    //console.log(util.inspect(obj));
                     if (!('finishedOn' in obj)){
                         return_shopping_list[data.shopping_list] = data.shopper_name;
                     }else{
                         delete return_shopping_list[data.shopping_list]; 
+                        client.delete(key_array[i]);
+                    }
+                    }catch(err){
+                        console.log("error caught");
                     }
                     //console.log(util.inspect(shopping_list));
             }

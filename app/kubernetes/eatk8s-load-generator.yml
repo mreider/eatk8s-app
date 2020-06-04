@@ -38,3 +38,9 @@ spec:
           - name: GROCER_PORT
             value: "8080"
         args: ["./endless.sh"]
+        livenessProbe:
+              httpGet:
+                path: /
+                port: 8080
+              initialDelaySeconds: 300
+              periodSeconds: 60
