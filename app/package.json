@@ -18,7 +18,7 @@
   "homepage": "https://github.com/mreider/eatk8s-node#readme",
   "dependencies": {
     "async": "^3.2.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bull": "^3.14.0",
     "cluster": "^0.7.7",
     "express": "^4.17.1",
